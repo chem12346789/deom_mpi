@@ -34,7 +34,7 @@ There are three things we need to do:
 
 1. Store all density matrices
 2. Look for the density matrix used
-3. Calculate the super operator and calculate the $dotrho^(n)_{/bf n}$
+3. Calculate the super operator and calculate the $\dot rho^(n)_{/bf n}$
 
 in step 1 and step 2 we will use an atomic hash map to do search things. In step 3, we can do it by using an embarrassingly parallel algorithm.
 
@@ -57,11 +57,11 @@ English document is up to here, 下面是中文文档。
    1. dev：使用python开发环境，会导致图片体积很大。
    2. deom_mpi.sh：一个帮助你运行应用程序的bash shell。
 
-正如文件夹名称所示，1d-corr 表示在该文件夹中，您可以计算给定系统的平衡状态，并计算其相关函数。 sto_quad 文件夹包含一个随机算法来计算四系统-环境耦合。
+正如文件夹名称所示，1d-corr 表示在该文件夹中，您可以计算给定系统的平衡状态，并计算其相关函数。 sto_quad 文件夹包含一个随机算法来计算二次系统-环境耦合。
 
 ## 安装
 
-您应该考虑尝试 [docker](https://www.docker.com/)，docker image builder 位于 /docker 文件夹中。请注意，如果您在中国科学技术大学，可以提供包含此图像的harbor服务，您可以联系我们。 （不要问我关于docker hub的事情，对我来说太慢了。如果你的互联网条件足够好，你可以帮我做。）
+您应该考虑尝试 [docker](https://www.docker.com/)，docker image builder 位于 /docker 文件夹中。请注意，如果您在中国科学技术大学，可以提供包含此图像的harbor服务，您可以联系我们。（不要问我关于dockerhub的事情，对我来说太慢了。如果你的互联网条件足够好，你可以帮我做。）
 在 /docker 文件夹中，我们只提供 Dockerfile，您需要下载那些软件并修改版本号。
 
 1. [eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page)
@@ -72,7 +72,7 @@ English document is up to here, 下面是中文文档。
    4. [jemalloc](https://github.com/jemalloc/jemalloc)(遇到麻烦？[点击它！](https://github.com/facebook/folly/issues/943))
 3. [json11](https://github.com/dropbox/json11)
 
-不要忘记修改版本号！然后你可以使用`docker build -t deom_mpi:conda_dev .`构建镜像，你可以通过/docker目录下的deom_mpi.sh运行一个容器。您可以将 deom_mpi:conda_dev 更改为您喜欢的IMAGE: TAG ，但不要忘记在执行此操作后修改 deom_mpi.sh。在 docker 容器中，只需构建您需要的应​​用程序，然后运行它！
+不要忘记修改版本号！然后你可以使用`docker build -t deom_mpi:conda_dev .`构建镜像，你可以通过/docker目录下的deom_mpi.sh运行一个容器。您可以将 deom_mpi:conda_dev 更改为您喜欢的IMAGE:TAG，但不要忘记在执行此操作后修改 deom_mpi.sh。在 docker 容器中，只需构建您需要的应​​用程序，然后运行它！
 
 ## 简介
 
@@ -81,9 +81,9 @@ English document is up to here, 下面是中文文档。
 
 1. 存储所有密度矩阵
 2. 寻找使用的密度矩阵
-3. 计算超算符，计算$dotrho^(n)_{/bf n}$
+3. 计算超算符，计算$\dot rho^(n)_{/bf n}$
 
-在第 1 步和第 2 步中，我们将使用原子哈希映射来进行搜索。在第 3 步中，我们可以使用令人尴尬的并行算法来完成。
+在第1步和第2步中，我们将使用原子哈希映射来进行搜索。在第3步中，我们可以使用令人尴尬的并行算法来完成。
 
 ## 注意
 

@@ -1,9 +1,0 @@
-Pin: pin-3.18-98339-436e5e748
-Copyright 2002-2020 Intel Corporation.
-E:  Attach to pid 34518 failed. 
-  The Operating System configuration prevents Pin from using the default (parent) injection mode.
-  To resolve this, either execute the following (as root):
-  $ echo 0 > /proc/sys/kernel/yama/ptrace_scope
-  Or use the "-injection child" option.
-  For more information, regarding child injection, see Injection section in the Pin User Manual.
-
