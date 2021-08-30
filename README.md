@@ -14,7 +14,7 @@ and as the name of the folder indicate, 1d-corr means in that folder, you can ca
 
 ## INSTALL
 
-You should consider trying [docker](https://www.docker.com/), docker image builder is in /docker folder. And note if you are in USTC, a harbor service that contains this image can be provided, you can contact us. (DO NOT ask me for docker hub things, too slow for me. If your internet condition is good enough, you can do it for me.)  
+You should consider trying [docker](https://www.docker.com/), docker image builder is in /docker folder. And note if you are in USTC, a harbor service that contains this image can be provided, you can contact us.  
 In the /docker folder, we only provide Dockerfile, you have to download those software and modify version number.
 
 1. [eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page)
@@ -61,7 +61,7 @@ English document is up to here, 下面是中文文档。
 
 ## 安装
 
-您应该考虑尝试 [docker](https://www.docker.com/)，docker image builder 位于 /docker 文件夹中。请注意，如果您在中国科学技术大学，可以提供包含此图像的harbor服务，您可以联系我们。（不要问我关于dockerhub的事情，对我来说太慢了。如果你的互联网条件足够好，你可以帮我做。）
+您应该考虑尝试 [docker](https://www.docker.com/)，docker image builder 位于 /docker 文件夹中。请注意，如果您在中国科学技术大学，可以提供包含此图像的harbor服务，您可以联系我们。
 在 /docker 文件夹中，我们只提供 Dockerfile，您需要下载那些软件并修改版本号。
 
 1. [eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page)
