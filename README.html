@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="deom">DEOM</h1>
+<h2 id="file">FILE</h2>
+<p>This includes two-part(bose and fermi) of <a href="https://en.wikipedia.org/wiki/Hierarchical_equations_of_motion">HEOM</a>(Hierarchical equations of motion):</p>
+<ol>
+<li>bose: boson bath and boson system</li>
+<li>fermi: fermi bath and fermi system</li>
+<li>docker: docker image builder</li>
+</ol>
+<p>and as the name of the folder indicate, 1d-corr means in that folder, you can calculate the equilibrium state of a given system, and calculate the correlation function of that. The sto_quad folder contains a stochastic algorithm to calculate quad system-bath coupling.</p>
+<h2 id="install">INSTALL</h2>
+<p>You should consider trying <a href="https://www.docker.com/">docker</a>, docker image builder is in /docker folder. And note if you are in USTC, a harbor service that contains this image can be provided, you can contact us. (DO NOT ask me for docker hub things, too slow.)<br>
+In the /docker folder, we only provide DOCKERFILE,</p>
+<h2 id="breif">BREIF</h2>
+<p>This is a HEOM calculator which ulize hashmap to do parallize filter. Technical detials is very simple:
+Take the boson, for example (Fermion will be written in this form, upto a minus sign at most), there are three things we need to do:</p>
+<ol>
+<li>Store all density matrices</li>
+<li>Look for the density matrix used</li>
+<li>Calculate the super operator and calculate the $dotrho'(n)'/bfn$$</li>
+</ol>
+<p>We first determine a data structure that is mapped by an indicator(e.g.$6_12_20_30_40_5$) to a density matrix label(specifically the location of the physical structure where the density matrix is stored), which we certainly hope will correspond to one by one, or at least one indicator to a matrix label. Because when the indicator is large we need a data structure that is both memory--friendly(red and black) and fast(dictionary tree), choose perfect hash mapping (perfect hash map, PHM), which requires a perfect hash function(Perfect Hash Function, PHF)(strictly defined data structures that are required in parallel conditions, otherwise we only need hash functions that collide as less as possible. Because perfect hash mapping is inherently avoidable racing condition.<br>
+Our parallel architecture takes a similar architecture to the mapping protocol, and we begin with the overall process: first we need to build all the information about the upper and lower layers used by any layer metric (e.g. we need $1_12_20_30_40_5$，$0_13_20_30_40_5$，$0_12_21_30_40_5$，$0_12_20_31_40_5$，$0_12_20_30_41_5$and $0_11_20_30_40_5$when calculating). Let's start with the first layer, calculate the hash value of these indicators as a key, and take the corresponding array indecs as a value, use the hash table to find, when the check can not find an array subscript, note that this step is not atomic Operation, of course, is also the part of the entire parallel skeleton that cannot be atomicized, although this step can be made closer to atomic operation by more granular control (each thread uses a different increase cardinality, for example, there are eight threads, then the first thread can only increase by 0). ，8，16。 The second thread can only increase by 1,9,17), but this can result in severe memory consumption so it is not adopted. The resulting array subscript is then stored for backup (index_table). At this point the mapping step is complete, and here is the protocol step.<br>
+Using the index_table obtained from the previous operation, we can calculate the $dot_rho'(n)','bf'$for each layer, because the information on the upper and lower layers is known. The advantage of this is that we avoid the racing condition that we encounter when calculating the sum of the various parts of the $\dot\rho^{(n)}_{\bf n}$.&quot;</p>
+<h2 id="note">NOTE</h2>
+<p>We WON NOT provide input file samples in some applications due to that part of the work is not complete.</p>
+<h2 id="translation">translation</h2>
+<p>English document is up to here, 下面是中文文档。</p>
+<h2 id="%E6%96%87%E4%BB%B6">文件</h2>
+<p>这包括 <a href="https://en.wikipedia.org/wiki/Hierarchical_equations_of_motion">HEOM</a>（分层运动方程）的两部分（玻色和费米）：</p>
+<ol>
+<li>bose：玻色子浴和玻色子系统</li>
+<li>fermi：费米浴和费米系统</li>
+<li>docker: docker 镜像构建器</li>
+</ol>
+<p>正如文件夹名称所示，1d-corr 表示在该文件夹中，您可以计算给定系统的平衡状态，并计算其相关函数。</p>
+<h2 id="%E5%AE%89%E8%A3%85">安装</h2>
+<p>您应该考虑尝试 <a href="https://www.docker.com/">docker</a>，docker image builder 位于 /docker 文件夹中。请注意，如果您在中国科学技术大学，可以提供包含此图像的港口服务，您可以联系我们。 （不要问我关于 docker hub 的事情，太慢了。）</p>
+<h2 id="%E6%B3%A8%E6%84%8F">注意</h2>
+<p>由于部分工作未完成，我们不会在某些应用程序中提供输入文件示例。</p>
+
+</body>
+</html>
