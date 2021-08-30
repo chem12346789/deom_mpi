@@ -15,7 +15,7 @@ and as the name of the folder indicate, 1d-corr means in that folder, you can ca
 ## INSTALL
 
 You should consider trying [docker](https://www.docker.com/), docker image builder is in /docker folder. And note if you are in USTC, a harbor service that contains this image can be provided, you can contact us. (DO NOT ask me for docker hub things, too slow for me. If your internet condition is good enough, you can do it for me.)  
-In the /docker folder, we only provide Dockerfile, you have to download those software and modify version number. yourself:
+In the /docker folder, we only provide Dockerfile, you have to download those software and modify version number.
 
 1. [eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page)
 2. [folly](https://github.com/facebook/folly/tree/master/folly)
@@ -48,7 +48,7 @@ English document is up to here, 下面是中文文档。
 
 ## 文件
 
-这包括 [HEOM](https://en.wikipedia.org/wiki/Hierarchical_equations_of_motion)（分层运动方程）的两部分（玻色和费米）：
+这包括 [HEOM](https://en.wikipedia.org/wiki/Hierarchical_equations_of_motion)（级联运动方程）的两部分（玻色和费米）：
 
 1.bose：玻色子浴和玻色子系统
 2. fermi：费米浴和费米系统
@@ -57,22 +57,22 @@ English document is up to here, 下面是中文文档。
    1. dev：使用python开发环境，会导致图片体积很大。
    2. deom_mpi.sh：一个帮助你运行应用程序的bash shell。
 
-正如文件夹名称所示，1d-corr 表示在该文件夹中，您可以计算给定系统的平衡状态，并计算其相关函数。 sto_quad 文件夹包含一个随机算法来计算四系统-浴槽耦合。
+正如文件夹名称所示，1d-corr 表示在该文件夹中，您可以计算给定系统的平衡状态，并计算其相关函数。 sto_quad 文件夹包含一个随机算法来计算四系统-环境耦合。
 
 ## 安装
 
-您应该考虑尝试 [docker](https://www.docker.com/)，docker image builder 位于 /docker 文件夹中。请注意，如果您在中国科学技术大学，可以提供包含此图像的港口服务，您可以联系我们。 （不要问我关于docker hub的事情，对我来说太慢了。如果你的互联网条件足够好，你可以帮我做。）
-在 /docker 文件夹中，我们只提供 Dockerfile，您需要下载那些软件并修改版本号。你自己：
+您应该考虑尝试 [docker](https://www.docker.com/)，docker image builder 位于 /docker 文件夹中。请注意，如果您在中国科学技术大学，可以提供包含此图像的harbor服务，您可以联系我们。 （不要问我关于docker hub的事情，对我来说太慢了。如果你的互联网条件足够好，你可以帮我做。）
+在 /docker 文件夹中，我们只提供 Dockerfile，您需要下载那些软件并修改版本号。
 
-1. [特征](https://eigen.tuxfamily.org/index.php?title=Main_Page)
-2. [愚蠢](https://github.com/facebook/folly/tree/master/folly)
+1. [eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page)
+2. [folly](https://github.com/facebook/folly/tree/master/folly)
    1. [googletest-release](https://github.com/google/googletest/releases)
    2. [fmt](https://github.com/fmtlib/fmt)
    3. [gperftools](https://github.com/gperftools/gperftools)
    4. [jemalloc](https://github.com/jemalloc/jemalloc)(遇到麻烦？[点击它！](https://github.com/facebook/folly/issues/943))
 3. [json11](https://github.com/dropbox/json11)
 
-不要忘记修改版本号！然后你可以使用`docker build -t deom_mpi:conda_dev .`构建镜像，你可以通过/docker目录下的deom_mpi.sh运行一个容器。您可以将 deom_mpi:conda_dev 更改为 IMAGE: TAG 您喜欢，但不要忘记在执行此操作后修改 deom_mpi.sh。在 docker 容器中，只需构建您需要的应​​用程序，然后运行它！
+不要忘记修改版本号！然后你可以使用`docker build -t deom_mpi:conda_dev .`构建镜像，你可以通过/docker目录下的deom_mpi.sh运行一个容器。您可以将 deom_mpi:conda_dev 更改为您喜欢的IMAGE: TAG ，但不要忘记在执行此操作后修改 deom_mpi.sh。在 docker 容器中，只需构建您需要的应​​用程序，然后运行它！
 
 ## 简介
 
