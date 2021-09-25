@@ -27,8 +27,8 @@ typedef struct {
   VectorXcd delt_res;
   VectorXcd expn;
   VectorXcd coef_abs;
-  nXXmat coef_lft;
-  nXXmat coef_rht;
+  nNNmat coef_lft;
+  nNNmat coef_rht;
   XXuimat_r keys;
   DIPOLE dipole;
   DIPOLE dipole1;
@@ -44,6 +44,8 @@ typedef struct {
   double dt;
   double ti;
   double tf;
+  int re_tree;
+  int filter;
 } CTRL;
 
 typedef struct {

@@ -73,7 +73,7 @@ void Init_sys(DEOM *d, const Json &json, const char *input_name) {
   // ##  init comb done  ##
 
   if (d->comb_list((d->lmax + d->nind), d->lmax) < d->nmax) {
-    d->nmax = d->comb_list(d->lmax + d->nind, d->lmax);
+    d->nmax = (ullint)(d->comb_list(d->lmax + d->nind, d->lmax)*1.2);
   } else {
     printf("mem error! but do not panic it maybe right.\n");
   }
@@ -90,7 +90,7 @@ void Init_sys(DEOM *d, const Json &json, const char *input_name) {
   }
 
   // ##  init list things ##
-  d->ham1 = MatrixXcd::Zero(NSYS, NSYS);
+  d->ham1 = MatrixNcd::Zero();
   for (int i = 0; i < d->nham; i++)
     for (int j = 0; j < d->nham; j++)
       d->ham1(i, j) = json["ham1"]["real"].array_items()[INDEX2(i, j, d->nham)].number_value() + complex<double>(1i) * json["ham1"]["imag"].array_items()[INDEX2(i, j, d->nham)].number_value();
@@ -118,8 +118,8 @@ void Init_sys(DEOM *d, const Json &json, const char *input_name) {
     d->expn(i) = json["expn"]["real"].array_items()[i].number_value() + complex<double>(1i) * json["expn"]["imag"].array_items()[i].number_value();
   }
 
-  d->coef_lft = std::vector<MatrixXcd, Eigen::aligned_allocator<MatrixXcd>>(d->nind);
-  d->coef_rht = std::vector<MatrixXcd, Eigen::aligned_allocator<MatrixXcd>>(d->nind);
+  d->coef_lft = nNNmat(d->nind);
+  d->coef_rht = nNNmat(d->nind);
   for (int mp = 0; mp < d->nind; mp++) {
     d->coef_lft[mp].resize(d->nmodmax, d->nmodmax);
     d->coef_rht[mp].resize(d->nmodmax, d->nmodmax);
@@ -175,6 +175,8 @@ void Init_ctrl(CTRL *c, const Json &json) {
   c->dt = json["dt"].number_value();
   c->ti = json["ti"].number_value();
   c->tf = json["tf"].number_value();
+  c->re_tree = json["re_tree"].number_value();
+  c->filter = json["filter"].number_value();
 }
 
 void Init_ctrl(CTRL *c, double dt, double ti, double tf) {

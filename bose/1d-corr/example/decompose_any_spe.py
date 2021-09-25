@@ -625,8 +625,8 @@ for vib_key, S_0, npsd, lmax in itertools.product([1.0], [0.4], [1], [40]):
     plt.xlim(-2, 2)
 
     plt.legend(loc='best')
-    plt.savefig('spe_{}_{}_{}_{}.pdf'.format(str(S_0), str(vib_key),
-                                             str(lmax), str(npsd)))
+    plt.savefig('spe_{}_{}_{}_{}.pdf'.format(str(S_0), str(vib_key), str(lmax),
+                                             str(npsd)))
     plt.clf()
     # spe_vib = phixx
     # spe_vib_b = phixy
@@ -634,7 +634,7 @@ for vib_key, S_0, npsd, lmax in itertools.product([1.0], [0.4], [1], [40]):
 
     spe = spe_vib + spe_vib_b + spe_vib_b + spe_b
 
-    print(spe[0], D2/2)
+    print(spe[0], D2 / 2)
     lamd = 1 / 2 * spe[0]  # reorganization energy
     hams = np.zeros((2, 2), dtype=complex)
     hams[1, 1] = 1
@@ -682,6 +682,11 @@ for vib_key, S_0, npsd, lmax in itertools.product([1.0], [0.4], [1], [40]):
         "nmod": len(expn),
         "nmodmax": nmod,
         "dt": 0.002,
+        "equilibrium": {
+            "ti": 0,
+            "tf": 15,
+            "dt": 0.002
+        },
         "nt": 20,
         "staticErr": 0,
         "inistate": 0,
@@ -717,17 +722,33 @@ for vib_key, S_0, npsd, lmax in itertools.product([1.0], [0.4], [1], [40]):
             "real": list(np.real(etar.flatten())),
             "imag": list(np.imag(etar.flatten()))
         },
-        "sdip_cub": {
-            "real": list(np.real(sdip.flatten())),
-            "imag": list(np.imag(sdip.flatten()))
+        "dipole": {
+            "sdip_cub": {
+                "real": list(np.real(sdip.flatten())),
+                "imag": list(np.imag(sdip.flatten()))
+            },
+            "bdip_cub": {
+                "real": list(np.real(bdip.flatten())),
+                "imag": list(np.imag(bdip.flatten()))
+            },
+            "pdip_cub": {
+                "real": list(np.real(pdip.flatten())),
+                "imag": list(np.imag(pdip.flatten()))
+            }
         },
-        "bdip_cub": {
-            "real": list(np.real(bdip.flatten())),
-            "imag": list(np.imag(bdip.flatten()))
-        },
-        "pdip_cub": {
-            "real": list(np.real(pdip.flatten())),
-            "imag": list(np.imag(pdip.flatten()))
+        "dipole1": {
+            "sdip_cub": {
+                "real": list(np.real(sdip.flatten())),
+                "imag": list(np.imag(sdip.flatten()))
+            },
+            "bdip_cub": {
+                "real": list(np.real(bdip.flatten())),
+                "imag": list(np.imag(bdip.flatten()))
+            },
+            "pdip_cub": {
+                "real": list(np.real(pdip.flatten())),
+                "imag": list(np.imag(pdip.flatten()))
+            }
         },
         "ampl": 0,
         "freq": np.real(50.2),

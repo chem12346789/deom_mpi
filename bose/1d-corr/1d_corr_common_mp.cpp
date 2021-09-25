@@ -133,7 +133,7 @@ void od_corr_mp(DEOMAUX *daux, DEOM *d, const CTRL *c, const char *frho_name, co
       for (int mp = 0; mp < d->nind; mp++) {
         tmp.setZero();
         const complex<double> sn = d->coef_abs(mp);
-        gen_key(d->zerokey, daux->key_tmp, mp, 1, d);
+        gen_key_p(d->zerokey, daux->key_tmp, mp, 1, d);
         int m1 = d->modLabel(mp);
         pos = tree->find(hash_bad(daux->key_tmp, d));
         if (pos > -1) {

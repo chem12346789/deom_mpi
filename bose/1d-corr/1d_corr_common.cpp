@@ -135,7 +135,7 @@ void od_corr(DEOMAUX *daux, DEOM *d, const CTRL *c, const char *frho_name, const
 
       for (int mp = 0; mp < d->nind; mp++) {
         const complex<double> sn = d->dipole1.bdip(mp) * d->coef_abs(mp);
-        gen_key(d->zerokey, daux->key_tmp, mp, 1, d);
+        gen_key_p(d->zerokey, daux->key_tmp, mp, 1, d);
         int m1 = d->modLabel(mp);
         pos = tree->find(hash_bad(daux->key_tmp, d));
         if (pos > -1) {
@@ -190,24 +190,34 @@ void od_corr(DEOMAUX *daux, DEOM *d, const CTRL *c, const char *frho_name, const
     for (i = 0; i < nsave[6]; i++)
       filter_p(d, d->ddos, d->keys, daux->ddos1, daux->keys1, tree, i);
 
+    if (ii < filter || ii % filter == 0) {
 #pragma omp for private(iado_) schedule(dynamic, 64)
-    for (iado_ = 0; iado_ < nsave[6]; iado_++) {
-      d->keys.row(iado_) = daux->keys1.row(iado_);
-      d->ddos[iado_].noalias() = daux->ddos1[iado_];
-    }
+      for (iado_ = 0; iado_ < nsave[6]; iado_++) {
+        d->keys.row(iado_) = daux->keys1.row(iado_);
+        d->ddos[iado_].noalias() = daux->ddos1[iado_];
+      }
 
 #pragma omp single
-    {
-      nsave[1] = d->nddo;
-    }
+      {
+        nsave[1] = d->nddo;
+      }
 
 #pragma omp for private(i) schedule(dynamic, 16)
-    for (i = nsave[0]; i < nsave[1]; i++)
-      construct_Mapping_p(d, tree, i);
+      for (i = nsave[0]; i < nsave[1]; i++)
+        construct_Mapping_p(d, tree, i);
 
 #pragma omp single
-    {
-      nsave[2] = d->nddo;
+      {
+        nsave[2] = d->nddo;
+        printf("nddo:%12d", nsave[1]);
+        printf("nddo:%12d", nsave[2]);
+      }
+    } else {
+#pragma omp single
+      {
+        nsave[1] = nsave[6];
+        nsave[2] = nsave[6];
+      }
     }
 
 #pragma omp for private(i) schedule(dynamic, 16)
@@ -222,13 +232,21 @@ void od_corr(DEOMAUX *daux, DEOM *d, const CTRL *c, const char *frho_name, const
     for (i = nsave[1]; i < nsave[2]; i++)
       daux->ddos3[i].noalias() = daux->ddos1[i] * dt2;
 
+    if (ii < filter || ii % filter == 0) {
 #pragma omp for private(i) schedule(dynamic, 16)
-    for (i = nsave[0]; i < nsave[2]; i++)
-      construct_Mapping_p(daux->ddos3, d, tree, i);
+      for (i = nsave[0]; i < nsave[2]; i++)
+        construct_Mapping_p(daux->ddos3, d, tree, i);
 
 #pragma omp single
-    {
-      nsave[3] = d->nddo;
+      {
+        nsave[3] = d->nddo;
+        printf("nddo:%12d", nsave[3]);
+      }
+    } else {
+#pragma omp single
+      {
+        nsave[3] = nsave[6];
+      }
     }
 
 #pragma omp for private(i) schedule(dynamic, 16)
@@ -253,13 +271,21 @@ void od_corr(DEOMAUX *daux, DEOM *d, const CTRL *c, const char *frho_name, const
       daux->ddos3[i].noalias() = daux->ddos2[i] * dt2;
     }
 
+    if (ii < filter || ii % filter == 0) {
 #pragma omp for private(i) schedule(dynamic, 16)
-    for (i = nsave[0]; i < nsave[3]; i++)
-      construct_Mapping_p(daux->ddos3, d, tree, i);
+      for (i = nsave[0]; i < nsave[3]; i++)
+        construct_Mapping_p(daux->ddos3, d, tree, i);
 
 #pragma omp single
-    {
-      nsave[4] = d->nddo;
+      {
+        nsave[4] = d->nddo;
+        printf("nddo:%12d", nsave[4]);
+      }
+    } else {
+#pragma omp single
+      {
+        nsave[4] = nsave[6];
+      }
     }
 
 #pragma omp for private(i) schedule(dynamic, 16)
@@ -284,13 +310,21 @@ void od_corr(DEOMAUX *daux, DEOM *d, const CTRL *c, const char *frho_name, const
       daux->ddos3[i].noalias() = daux->ddos2[i] * dt;
     }
 
+    if (ii < filter || ii % filter == 0) {
 #pragma omp for private(i) schedule(dynamic, 16)
-    for (i = nsave[0]; i < nsave[4]; i++)
-      construct_Mapping_p(daux->ddos3, d, tree, i);
+      for (i = nsave[0]; i < nsave[4]; i++)
+        construct_Mapping_p(daux->ddos3, d, tree, i);
 
 #pragma omp single
-    {
-      nsave[5] = d->nddo;
+      {
+        nsave[5] = d->nddo;
+        printf("nddo:%12d\n", nsave[5]);
+      }
+    } else {
+#pragma omp single
+      {
+        nsave[5] = nsave[6];
+      }
     }
 
 #pragma omp for private(i) schedule(dynamic, 16)

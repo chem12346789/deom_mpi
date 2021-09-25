@@ -190,7 +190,7 @@ void construct_Mapping_p(DEOM *d, Trie *tree, int iado) {
 
   if (key.sum() < d->lmax) {
     for (int mp = 0; mp < d->nind; mp++) {
-      hash_val = gen_key(key, key_swell, mp, 1, d);
+      hash_val = gen_key_p(key, key_swell, mp, 1, d);
       // hash_val = hash_bad(key_swell, d);
       int pos = tree->find(hash_val);
       if (pos == -1) {
@@ -211,7 +211,7 @@ void construct_Mapping_p(DEOM *d, Trie *tree, int iado) {
 
   for (int mp = 0; mp < d->nind; mp++) {
     if (key(mp) > 0) {
-      hash_val = gen_key(key, key_swell, mp, -1, d);
+      hash_val = gen_key_n(key, key_swell, mp, -1, d);
       // hash_val = hash_bad(key_swell, d);
       int pos = tree->find(hash_val);
       if (pos == -1) {
@@ -249,7 +249,7 @@ void construct_Mapping_p(nNNmat &ddos, DEOM *d, Trie *tree, int iado) {
 
     if (key.sum() < d->lmax) {
       for (int mp = 0; mp < d->nind; mp++) {
-        hash_val = gen_key(key, key_swell, mp, 1, d);
+        hash_val = gen_key_p(key, key_swell, mp, 1, d);
         // hash_val = hash_bad(key_swell, d);
         int pos = tree->find(hash_val);
         if (pos == -1) {
@@ -270,7 +270,7 @@ void construct_Mapping_p(nNNmat &ddos, DEOM *d, Trie *tree, int iado) {
 
     for (int mp = 0; mp < d->nind; mp++) {
       if (key(mp) > 0) {
-        hash_val = gen_key(key, key_swell, mp, -1, d);
+        hash_val = gen_key_n(key, key_swell, mp, -1, d);
         // hash_val = hash_bad(key_swell, d);
         int pos = tree->find(hash_val);
         if (pos == -1) {
@@ -293,7 +293,7 @@ void construct_Mapping_p(nNNmat &ddos, DEOM *d, Trie *tree, int iado) {
 
 void filter_p(DEOM *d, const nNNmat &ddos, const XXuimat_r &keys, nNNmat &ddos1, XXuimat_r &keys1, Trie *tree, int iado) {
   XXuivet_r key(d->nind);
-  if (is_valid(ddos, iado, d->ferr)) {
+  if (is_valid(ddos[iado], d->ferr)) {
     int nddo_tmp;
 #pragma omp critical
     {

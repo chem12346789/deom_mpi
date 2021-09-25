@@ -1,7 +1,31 @@
 #include "deom.hpp"
 #include "mr.hpp"
 
+// this file is same at both fermion and boson keep it in mind
+
+// write ddos and keys to file
+// we will write ddos to file(and read it later)
+// this function should NOT change any ddos or keys in d(daux may be changed)
 void write_ddos(DEOMAUX *daux, DEOM *d, const char *fname_ddos, const char *fname_keys) {
+  ofstream fstream_ddos(fname_ddos);
+  ofstream fstream_keys(fname_keys);
+  IOFormat HeavyFmt(FullPrecision);
+
+  for (size_t i = 0; i < d->nddo; i++) {
+    if(is_valid(d->ddos[i], d->ferr)){
+    fstream_ddos << d->ddos[i].format(HeavyFmt) << '\n';
+    fstream_keys << d->keys.row(d->nddo);}
+  }
+  fstream_ddos.close();
+  fstream_keys.close();
+}
+
+// write ddos and keys to file
+// we will write ddos to three part file(real one , imag one and both of it)
+// so that you can save it for python read later
+void write_ddos(DEOMAUX *daux, DEOM *d, const char *fname_ddos, const char *fname_ddosr, const char *fname_ddosi, const char *fname_keys) {
+  ofstream fstream_ddosr(fname_ddosr);
+  ofstream fstream_ddosi(fname_ddosi);
   ofstream fstream_ddos(fname_ddos);
   ofstream fstream_keys(fname_keys);
   IOFormat HeavyFmt(FullPrecision);
@@ -9,24 +33,13 @@ void write_ddos(DEOMAUX *daux, DEOM *d, const char *fname_ddos, const char *fnam
   int i;
   int iado_;
   vector<int> nsave(7);
-  Trie *tree = new Trie(10 * d->nind);
+  Trie *tree;
 
 #pragma omp parallel default(shared)
   {
-#pragma omp for private(iado_) schedule(dynamic, 64)
-    for (iado_ = 0; iado_ < d->nddo; iado_++) {
-      for (int mp = 0; mp < 2 * d->nind + 1; mp++)
-        d->g_index_list_pos(iado_, mp) = 0;
-      for (int mp = 0; mp < d->nind; mp++)
-        daux->keys1(iado_, mp) = -1;
-      daux->ddos1[iado_].setZero();
-    }
-
 #pragma omp single
     {
       nsave[6] = d->nddo;
-      tree->clear();
-      delete tree;
       tree = new Trie(min((ullint)d->load * (ullint)d->nind * (ullint)d->nddo, d->nmax));
       d->nddo = 0;
       nsave[0] = 0;
@@ -44,26 +57,18 @@ void write_ddos(DEOMAUX *daux, DEOM *d, const char *fname_ddos, const char *fnam
   }
 
   for (size_t i = 0; i < d->nddo; i++) {
+    fstream_ddosr << d->ddos[i].real().format(HeavyFmt) << '\n';
+    fstream_ddosi << d->ddos[i].imag().format(HeavyFmt) << '\n';
     fstream_ddos << d->ddos[i].format(HeavyFmt) << '\n';
   }
   fstream_keys << d->keys.block(0, 0, d->nddo, d->nind);
+  fstream_ddosr.close();
+  fstream_ddosi.close();
   fstream_ddos.close();
   fstream_keys.close();
 }
 
-void write_ddos_no_filter(DEOMAUX *daux, DEOM *d, const char *fname_ddos, const char *fname_keys) {
-  ofstream fstream_ddos(fname_ddos);
-  ofstream fstream_keys(fname_keys);
-  IOFormat HeavyFmt(FullPrecision);
-
-  for (size_t i = 0; i < d->nddo; i++) {
-    fstream_ddos << d->ddos[i].format(HeavyFmt) << '\n';
-  }
-  fstream_keys << d->keys.block(0, 0, d->nddo, d->nind);
-  fstream_ddos.close();
-  fstream_keys.close();
-}
-
+// read ddos, you can load the ddos file you save before. NOTE you should init deom before doing that.
 void read_ddos(DEOMAUX *daux, DEOM *d, const char *fname_ddos, const char *fname_keys) {
   ifstream fstream_ddos(fname_ddos);
   ifstream fstream_keys(fname_keys);

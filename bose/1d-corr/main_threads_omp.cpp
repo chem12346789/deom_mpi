@@ -21,14 +21,11 @@ void init_deom(const Json &json, int argc, char *argv[]) {
 
   Init_ctrl(c, json["equilibrium"]);
   equilibrium(daux, d, c, "prop-rho-eq1.dat");
-  write_ddos_no_filter(daux, d, "equ_ddos2", "equ_keys2");
-  write_ddos(daux, d, "equ_ddos1", "equ_keys1");
+  write_ddos(daux, d, "equ_ddos1", "equ_ddos1r", "equ_ddos1i", "equ_keys1");
 
-  Init_ctrl(c, json);
+  Init_ctrl(c, json["corr"]);
+  read_ddos(daux, d, "equ_ddos1", "equ_keys1");
   od_corr(daux, d, c, "prop-rho1.dat", "prop-pol1.dat", 'l');
-  // stochastic(daux, d, c, "prop-rho.dat");
-
-  // read_ddos(daux, d, "tmp_ddos1", "tmp_keys1");
 }
 //
 
