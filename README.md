@@ -2,7 +2,7 @@
 
 ## FILE  
 
-This includes two-part(bose and fermi) of [HEOM](https://en.wikipedia.org/wiki/Hierarchical_equations_of_motion)(Hierarchical equations of motion):  
+This includes two-part (bose and fermi) of [HEOM](https://en.wikipedia.org/wiki/Hierarchical_equations_of_motion) (Hierarchical equations of motion):  
 
 1. bose: boson bath and boson system
 2. fermi: fermi bath and fermi system
